@@ -1,9 +1,3 @@
-// Raffle
-// Enter a lottery by paying some amount
-// Pick a random winner (verifiably random)
-// Winners to be selected every X minutes --> completely automated
-// We need Chainlink Oracle for randomness and automated execution of the lottery (using chainlink keepers)
-
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
@@ -18,10 +12,12 @@ error Raffle__NotOpen();
 error Raffle__UpkeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256 raffleState);
 
 /**
- * @title A simple raffle/lottery contract
+ * @title A simple lottery contract
  * @author Othaimeen
- * @notice This contract is for creating an untamperable decentralized lottery
- * @dev This contract implements chainlink VRF v2 and Chainlink keepers
+ * @notice This contract creates an untamperable decentralized lottery
+ * @notice Enter the lottery by paying some amount
+ * @notice Pick a verifiably random winner automatically every X minutes
+ * @dev This contract implements chainlink VRF v2 (for randomness) and Chainlink keepers (automated execution)
  */
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     /* TYPE DECLARATIONS */
@@ -123,7 +119,8 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     }
 
     /**
-     * @notice This function is called by the chainlink keepers when the `checkUpkeep()` function returns true
+     * @notice This function is called by the chainlink keepers when
+     * @notice the `checkUpkeep()` function returns true
      * @dev If checkUpkeep() has performData, it is automatically passed on to this function
      */
     function performUpkeep(
@@ -154,7 +151,8 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     /**
      * @notice This function gets the random number from the VRF coordinator and picks a winner
      * @notice After picking the winner, it resets the state, the players array, and the last time stamp
-     * @notice It sends the winnings to the winner's account and notifies everyone that the winner has been picked.
+     * @notice It sends the winnings to the winner's account and
+     * @notice notifies everyone that the winner has been picked.
      */
     function fulfillRandomWords(
         uint256, /* requestId */
