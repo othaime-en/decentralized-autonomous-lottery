@@ -10,6 +10,13 @@ const networkConfig = {
         callbackGasLimit: "500000",
         interval: "30",
     },
+    5: {
+        name: "goerli",
+        entranceFee: ethers.utils.parseEther("0.01"),
+        subscriptionId: "10529",
+        callbackGasLimit: 500000,
+        interval: "30",
+    },
     31337: {
         name: "hardhat",
         entranceFee: ethers.utils.parseEther("0.01"),
