@@ -18,6 +18,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 })
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || ""
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || ""
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
 const PRIVATE_KEY_2 = process.env.PRIVATE_KEY_2 || ""
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
@@ -34,6 +35,12 @@ module.exports = {
         rinkeby: {
             url: RINKEBY_RPC_URL,
             chainId: 4,
+            accounts: [PRIVATE_KEY, PRIVATE_KEY_2],
+            blockConfirmations: 6,
+        },
+        goerli: {
+            url: GOERLI_RPC_URL,
+            chainId: 5,
             accounts: [PRIVATE_KEY, PRIVATE_KEY_2],
             blockConfirmations: 6,
         },
@@ -55,6 +62,7 @@ module.exports = {
     namedAccounts: {
         deployer: {
             default: 0,
+            5: 1,
         },
         player: {
             default: 1,
